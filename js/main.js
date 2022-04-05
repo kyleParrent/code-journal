@@ -2,16 +2,13 @@
 /* exported data */
 
 var img = document.querySelector('img');
+var form = document.querySelector('form');
 var userImage = document.querySelector('.photo');
 var userTitle = document.querySelector('.user-title');
 var userNotes = document.querySelector('.user-notes');
-var saveB = document.querySelector('.save');
-
-function savingPic(event) {
-  img.src = userImage.value;
-}
 
 function savingInfo(event) {
+  event.preventDefault();
   var store = {};
   store.images = userImage.value;
   store.title = userTitle.value;
@@ -19,10 +16,13 @@ function savingInfo(event) {
   store.Id = data.nextEntryId;
   data.nextEntryId++;
   data.entries.push(store);
-  var dataJSON = JSON.stringify(data);
-  localStorage.setItem('javascipt-local-storage', dataJSON);
+  form.reset();
+  img.src = '/images/placeholder-image-square.jpg';
 }
 
-window.addEventListener('beforeunload', savingInfo);
+function savingPic(event) {
+  img.src = userImage.value;
+}
+
 userImage.addEventListener('input', savingPic);
-saveB.addEventListener('submit', savingInfo);
+form.addEventListener('submit', savingInfo);
