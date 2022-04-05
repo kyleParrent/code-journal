@@ -1,25 +1,74 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Code Journal</title>
   <link rel="icon" href="images/favicon.ico">
-  <link
-    rel="stylesheet"
-    crossorigin="anonymous"
+  <link rel="stylesheet" crossorigin="anonymous"
     href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.14.0/css/all.min.css"
     integrity="sha512-1PKOgIY59xJ8Co8+NE6FZ+LOAZKjy+KY8iq0G4B3CyeY6wYHN3yt9PW0XpSriVlkMXe40PTKnXrLnZ9+fkDaog==">
   <link rel="stylesheet" href="css/reset.css">
   <link rel="stylesheet" href="css/layout.css">
   <link rel="stylesheet" href="css/styles.css">
 </head>
-<body>
-  <header>
-  </header>
-  <main>
-  </main>
+
+<body class="page-color">
+  <div class="container top-c">
+    <div class="row">
+      <div class="column-full banner">
+        <header>
+          <p>Code Journal</p>
+        </header>
+      </div>
+    </div>
+  </div>
+  <div class="container">
+    <div class="row">
+      <div class="column-full">
+        <h1>New Entry</h1>
+      </div>
+    </div>
+    <div class="row">
+      <div class="column-full">
+        <div data-view="entry-form">
+          <form>
+            <div class="row">
+              <div class="column-half">
+                <div class="image">
+                  <img src="/images/placeholder-image-square.jpg">
+                </div>
+              </div>
+              <div class="column-half">
+                <div class="lab">
+                  <label for="title">Title</label>
+                </div>
+                <input type="text" id="title" class="user-input user-title" required>
+                <div class="lab">
+                  <label for="photo-url">Photo URL</label>
+                </div>
+                <input type="text" id="photo-url" class="user-input photo" required>
+              </div>
+            </div>
+            <div class="row">
+              <div class="column-full">
+                <div class="lab">
+                  <label for="notes">Notes</label>
+                </div>
+                <textarea id="notes" class="user-input user-notes" required></textarea>
+                <div class="save">
+                  <button type="submit" value="save">SAVE</button>
+                </div>
+              </div>
+            </div>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
   <script src="js/data.js"></script>
   <script src="js/main.js"></script>
 </body>
+
 </html>
