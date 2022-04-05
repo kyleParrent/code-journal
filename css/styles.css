@@ -7,7 +7,7 @@ label {
 }
 
 button {
-  background-color: rgb(85, 10, 105);
+  background-color: #502274;
   color: white;
   padding: 6px 12px;
   margin-top: 10px;
@@ -25,9 +25,10 @@ textarea {
   height: 150px;
 }
 
-input:required,
-textarea:required {
-  border-color: black;
+input:focus,
+textarea:focus {
+  outline: none;
+  border: 2px solid #502274;
 }
 
 img {
@@ -37,7 +38,7 @@ img {
   margin-bottom: 20px;
 }
 
-#save {
+.save {
   text-align: right;
 }
 
@@ -46,7 +47,7 @@ img {
   margin: 0 auto;
   font-size: 24px;
   padding: 0 1.5rem;
-  background-color: rgb(85, 10, 105);
+  background-color: #502274;
   color: white;
 }
 
@@ -62,9 +63,5 @@ img {
 
 .container {
   max-width: 100%;
-  background-color: rgb(85, 10, 105);
-}
-
-.lab {
-  border-color: purple;
+  background-color: #502274;
 }
