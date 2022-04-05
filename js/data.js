@@ -13,3 +13,9 @@ function beforeCall(event) {
 }
 
 window.addEventListener('beforeunload', beforeCall);
+
+var previousDataJSON = localStorage.getItem('Entry Data');
+var previousData = JSON.parse(previousDataJSON);
+if (previousData !== null) {
+  data = previousData;
+}

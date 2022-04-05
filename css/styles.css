@@ -42,6 +42,17 @@ img {
   text-align: right;
 }
 
+ul {
+  list-style: none;
+  list-style-position: inside;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+.entry {
+  margin-bottom: 30px;
+}
+
 .banner {
   max-width: 575px;
   margin: 0 auto;
@@ -64,4 +75,8 @@ img {
 .top-c {
   max-width: 100%;
   background-color: #502274;
+}
+
+.inline {
+  display: inline-block;
 }
