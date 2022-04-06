@@ -38,8 +38,28 @@ img {
   object-fit: contain;
 }
 
+ul {
+  list-style: none;
+  list-style-position: inside;
+  padding-left: 0;
+  margin-top: 0;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+a {
+  font-size: 18px;
+  margin-left: 20px;
+}
+
 .save {
   text-align: right;
+}
+
+.entry {
+  margin-bottom: 30px;
 }
 
 .banner {
@@ -64,4 +84,17 @@ img {
 .top-c {
   max-width: 100%;
   background-color: #502274;
+}
+
+.inline {
+  display: inline-block;
+}
+
+.entries {
+  margin-bottom: 20px;
+}
+
+.to-new-entry {
+  float: right;
+  margin: 21px 0;
 }

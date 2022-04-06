@@ -19,20 +19,21 @@
     <div class="row">
       <div class="column-full banner">
         <header>
-          <p>Code Journal</p>
+          <p class="inline">Code Journal</p>
+          <a class="to-entries change-view" data-view="entries">Entries</a>
         </header>
       </div>
     </div>
   </div>
   <div class="container">
-    <div class="row">
-      <div class="column-full">
-        <h1>New Entry</h1>
+    <div data-view="entry-form" class="view">
+      <div class="row">
+        <div class="column-full">
+          <h1>New Entry</h1>
+        </div>
       </div>
-    </div>
-    <div class="row">
-      <div class="column-full">
-        <div data-view="entry-form">
+      <div class="row">
+        <div class="column-full">
           <form>
             <div class="row">
               <div class="column-half">
@@ -58,13 +59,19 @@
                 </div>
                 <textarea id="notes" class="user-input user-notes" required></textarea>
                 <div class="save">
-                  <button type="submit" value="save">SAVE</button>
+                  <button type="submit" value="save" class="again-entries" data-view="entries">SAVE</button>
                 </div>
               </div>
             </div>
           </form>
         </div>
       </div>
+    </div>
+    <div data-view="entries" class="view hidden">
+      <h1 class="inline">Entries</h1>
+      <button class="to-new-entry inline change-view" data-view="entry-form">NEW</button>
+      <ul>
+      </ul>
     </div>
   </div>
   <script src="js/data.js"></script>
