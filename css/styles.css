@@ -93,3 +93,8 @@ a {
 .entries {
   margin-bottom: 20px;
 }
+
+.to-new-entry {
+  float: right;
+  margin: 21px 0;
+}

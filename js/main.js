@@ -18,6 +18,8 @@ function savingInfo(event) {
   data.entries.push(store);
   form.reset();
   img.src = '/images/placeholder-image-square.jpg';
+  viewSwitch('entries');
+  theUL.appendChild(journalEntry(store));
 }
 
 function savingPic(event) {
@@ -57,7 +59,31 @@ function journalEntry(entry) {
 function domLoad(event) {
   for (var i = 0; i < data.entries.length; i++) {
     theUL.appendChild(journalEntry(data.entries[i]));
+    viewSwitch(data.view);
   }
 }
 
 window.addEventListener('DOMContentLoaded', domLoad);
+
+var button = document.querySelector('.to-new-entry');
+var nav = document.querySelector('.to-entries');
+var views = document.querySelectorAll('.view');
+
+function viewSwitch(view) {
+  for (var i = 0; i < views.length; i++) {
+    if (views[i].getAttribute('data-view') === view) {
+      views[i].className = 'view';
+    } else {
+      views[i].className = 'view hidden';
+    }
+  }
+  data.view = view;
+}
+
+function viewEvent(event) {
+  var targetDV = event.target.getAttribute('data-view');
+  viewSwitch(targetDV);
+}
+
+button.addEventListener('click', viewEvent);
+nav.addEventListener('click', viewEvent);
