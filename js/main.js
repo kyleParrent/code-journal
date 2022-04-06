@@ -19,7 +19,7 @@ function savingInfo(event) {
   form.reset();
   img.src = '/images/placeholder-image-square.jpg';
   viewSwitch('entries');
-  theUL.appendChild(journalEntry(store));
+  theUL.prepend(journalEntry(store));
 }
 
 function savingPic(event) {
@@ -58,7 +58,7 @@ function journalEntry(entry) {
 
 function domLoad(event) {
   for (var i = 0; i < data.entries.length; i++) {
-    theUL.appendChild(journalEntry(data.entries[i]));
+    theUL.prepend(journalEntry(data.entries[i]));
     viewSwitch(data.view);
   }
 }
