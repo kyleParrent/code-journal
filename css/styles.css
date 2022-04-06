@@ -49,6 +49,11 @@ h2 {
   margin-top: 0;
 }
 
+a {
+  font-size: 18px;
+  margin-left: 20px;
+}
+
 .save {
   text-align: right;
 }
