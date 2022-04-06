@@ -38,15 +38,19 @@ img {
   object-fit: contain;
 }
 
-.save {
-  text-align: right;
-}
-
 ul {
   list-style: none;
   list-style-position: inside;
   padding-left: 0;
   margin-top: 0;
+}
+
+h2 {
+  margin-top: 0;
+}
+
+.save {
+  text-align: right;
 }
 
 .entry {
@@ -79,4 +83,8 @@ ul {
 
 .inline {
   display: inline-block;
+}
+
+.entries {
+  margin-bottom: 20px;
 }

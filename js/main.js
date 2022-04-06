@@ -38,11 +38,10 @@ function journalEntry(entry) {
   col.className = 'column-half entry';
   row.appendChild(col);
   var image = document.createElement('img');
-  var userImg = document.createTextNode(entry.images);
-  image.appendChild(userImg);
+  image.setAttribute('src', entry.images);
   col.appendChild(image);
   var col2 = document.createElement('div');
-  col2.className = 'column-half';
+  col2.className = 'column-half entries';
   row.appendChild(col2);
   var header = document.createElement('h2');
   var userName = document.createTextNode(entry.title);
@@ -56,7 +55,7 @@ function journalEntry(entry) {
 }
 
 function domLoad(event) {
-  for (var i = 0; i < data.entries; i++) {
+  for (var i = 0; i < data.entries.length; i++) {
     theUL.appendChild(journalEntry(data.entries[i]));
   }
 }
