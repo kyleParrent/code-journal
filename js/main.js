@@ -25,7 +25,7 @@ function savingInfo(event) {
     var newEntryLi = journalEntry(editedEntry);
     for (var ii = 0; ii < liList.length; ii++) {
       var listEntryJSON = liList[ii].getAttribute('data-entry-id');
-      var listEntry = JSON.parse(listEntryJSON);
+      var listEntry = parseInt(listEntryJSON);
       if (listEntry === editedEntry.id) {
         liList[ii].replaceWith(newEntryLi);
         form.reset();
@@ -122,7 +122,7 @@ theUL.addEventListener('click', function (event) {
     viewSwitch('entry-form');
     var parentLi = event.target.closest('li');
     var parentIdJSON = parentLi.getAttribute('data-entry-id');
-    var parentId = JSON.parse(parentIdJSON);
+    var parentId = parseInt(parentIdJSON);
     for (var i = 0; i < data.entries.length; i++) {
       if (data.entries[i].id === parentId) {
         data.editing = data.entries[i];
