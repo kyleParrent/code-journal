@@ -10,16 +10,40 @@ var userNotes = document.querySelector('.user-notes');
 function savingInfo(event) {
   event.preventDefault();
   var store = {};
-  store.images = userImage.value;
-  store.title = userTitle.value;
-  store.notes = userNotes.value;
-  store.Id = data.nextEntryId;
-  data.nextEntryId++;
-  data.entries.push(store);
-  form.reset();
-  img.src = '/images/placeholder-image-square.jpg';
-  viewSwitch('entries');
-  theUL.prepend(journalEntry(store));
+  var liList = document.querySelectorAll('li');
+  if (data.editing !== null) {
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].id === data.editing.id) {
+        data.entries[i].images = userImage.value;
+        data.entries[i].title = userTitle.value;
+        data.entries[i].notes = userNotes.value;
+        data.editing = null;
+        var editedEntry = data.entries[i];
+        break;
+      }
+    }
+    var newEntryLi = journalEntry(editedEntry);
+    for (var ii = 0; ii < liList.length; ii++) {
+      var listEntryJSON = liList[ii].getAttribute('data-entry-id');
+      var listEntry = parseInt(listEntryJSON);
+      if (listEntry === editedEntry.id) {
+        liList[ii].replaceWith(newEntryLi);
+        form.reset();
+        viewSwitch('entries');
+      }
+    }
+  } else {
+    store.images = userImage.value;
+    store.title = userTitle.value;
+    store.notes = userNotes.value;
+    store.id = data.nextEntryId;
+    data.nextEntryId++;
+    data.entries.push(store);
+    form.reset();
+    img.src = '/images/placeholder-image-square.jpg';
+    viewSwitch('entries');
+    theUL.prepend(journalEntry(store));
+  }
 }
 
 function savingPic(event) {
@@ -33,6 +57,7 @@ var theUL = document.querySelector('ul');
 
 function journalEntry(entry) {
   var list = document.createElement('li');
+  list.setAttribute('data-entry-id', entry.id);
   var row = document.createElement('div');
   row.className = 'row';
   list.appendChild(row);
@@ -46,9 +71,13 @@ function journalEntry(entry) {
   col2.className = 'column-half entries';
   row.appendChild(col2);
   var header = document.createElement('h2');
+  header.className = 'inline';
   var userName = document.createTextNode(entry.title);
   header.appendChild(userName);
   col2.appendChild(header);
+  var editSign = document.createElement('i');
+  editSign.className = 'fas fa-pen icon';
+  col2.appendChild(editSign);
   var para = document.createElement('p');
   var userNotes = document.createTextNode(entry.notes);
   para.appendChild(userNotes);
@@ -87,3 +116,20 @@ function viewEvent(event) {
 
 button.addEventListener('click', viewEvent);
 nav.addEventListener('click', viewEvent);
+
+theUL.addEventListener('click', function (event) {
+  if (event.target.matches('.icon')) {
+    viewSwitch('entry-form');
+    var parentLi = event.target.closest('li');
+    var parentIdJSON = parentLi.getAttribute('data-entry-id');
+    var parentId = parseInt(parentIdJSON);
+    for (var i = 0; i < data.entries.length; i++) {
+      if (data.entries[i].id === parentId) {
+        data.editing = data.entries[i];
+        userNotes.value = data.editing.notes;
+        userImage.value = data.editing.images;
+        userTitle.value = data.editing.title;
+      }
+    }
+  }
+});
