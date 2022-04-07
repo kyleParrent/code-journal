@@ -7,6 +7,8 @@ var userImage = document.querySelector('.photo');
 var userTitle = document.querySelector('.user-title');
 var userNotes = document.querySelector('.user-notes');
 
+// look at debugger to try and see
+
 function savingInfo(event) {
   event.preventDefault();
   var store = {};
@@ -18,6 +20,14 @@ function savingInfo(event) {
         data.entries[i].notes = userNotes.value;
         data.editing = null;
         viewSwitch('entries');
+        var newEntry = journalEntry(data.entries[i]);
+        var liList = document.querySelectorAll('li');
+        for (var ii = 0; ii < liList.length; ii++) {
+          var listEntry = liList[ii].getAttribute('data-entry-id');
+          if (listEntry === data.entries[i].id) {
+            liList[ii].replaceWith(newEntry);
+          }
+        }
       }
     }
   } else {
