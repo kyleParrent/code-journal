@@ -7,11 +7,10 @@ var userImage = document.querySelector('.photo');
 var userTitle = document.querySelector('.user-title');
 var userNotes = document.querySelector('.user-notes');
 
-// look at debugger to try and see
-
 function savingInfo(event) {
   event.preventDefault();
   var store = {};
+  var liList = document.querySelectorAll('li');
   if (data.editing !== null) {
     for (var i = 0; i < data.entries.length; i++) {
       if (data.entries[i].id === data.editing.id) {
@@ -19,15 +18,18 @@ function savingInfo(event) {
         data.entries[i].title = userTitle.value;
         data.entries[i].notes = userNotes.value;
         data.editing = null;
+        var editedEntry = data.entries[i];
+        break;
+      }
+    }
+    var newEntryLi = journalEntry(editedEntry);
+    for (var ii = 0; ii < liList.length; ii++) {
+      var listEntryJSON = liList[ii].getAttribute('data-entry-id');
+      var listEntry = JSON.parse(listEntryJSON);
+      if (listEntry === editedEntry.id) {
+        liList[ii].replaceWith(newEntryLi);
+        form.reset();
         viewSwitch('entries');
-        var newEntry = journalEntry(data.entries[i]);
-        var liList = document.querySelectorAll('li');
-        for (var ii = 0; ii < liList.length; ii++) {
-          var listEntry = liList[ii].getAttribute('data-entry-id');
-          if (listEntry === data.entries[i].id) {
-            liList[ii].replaceWith(newEntry);
-          }
-        }
       }
     }
   } else {
@@ -52,12 +54,10 @@ userImage.addEventListener('input', savingPic);
 form.addEventListener('submit', savingInfo);
 
 var theUL = document.querySelector('ul');
-var htmlID = 1;
 
 function journalEntry(entry) {
   var list = document.createElement('li');
-  list.setAttribute('data-entry-id', htmlID);
-  htmlID++;
+  list.setAttribute('data-entry-id', entry.id);
   var row = document.createElement('div');
   row.className = 'row';
   list.appendChild(row);
@@ -121,10 +121,10 @@ theUL.addEventListener('click', function (event) {
   if (event.target.matches('.icon')) {
     viewSwitch('entry-form');
     var parentLi = event.target.closest('li');
-    var parentId = parentLi.getAttribute('data-entry-id');
-    var parId = JSON.parse(parentId);
+    var parentIdJSON = parentLi.getAttribute('data-entry-id');
+    var parentId = JSON.parse(parentIdJSON);
     for (var i = 0; i < data.entries.length; i++) {
-      if (data.entries[i].id === parId) {
+      if (data.entries[i].id === parentId) {
         data.editing = data.entries[i];
         userNotes.value = data.editing.notes;
         userImage.value = data.editing.images;
