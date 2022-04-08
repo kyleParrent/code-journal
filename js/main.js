@@ -169,6 +169,7 @@ confirmB.addEventListener('click', function (event) {
     if (listEntry === editedEntry.id) {
       liList[ii].remove();
       data.editing = null;
+      form.reset();
       viewSwitch('entries');
     }
   }

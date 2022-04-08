@@ -64,9 +64,9 @@ a {
 }
 
 .banner {
-  min-width: 575px;
+  min-width: 900px;
   font-size: 24px;
-  margin: 0 1.5rem;
+  margin: 0 1.5rem 0 0;
   background-color: #502274;
   color: white;
 }
@@ -104,13 +104,12 @@ a {
 }
 
 .row {
-  max-width: 575px;
+  max-width: 900px;
   margin: 0 auto;
 }
 
 .entries-row {
-  max-width: 575px;
-  margin: 0 1.5rem;
+  max-width: 900px;
 }
 
 .padding-none {
@@ -170,4 +169,8 @@ a {
 
 .question {
   font-weight: bold;
+}
+
+.con-margin {
+  margin: 0;
 }
