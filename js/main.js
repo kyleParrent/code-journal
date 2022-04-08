@@ -29,6 +29,7 @@ function savingInfo(event) {
       if (listEntry === editedEntry.id) {
         liList[ii].replaceWith(newEntryLi);
         form.reset();
+        deleteButton.className = 'delete-button hidden';
         viewSwitch('entries');
       }
     }
@@ -117,9 +118,12 @@ function viewEvent(event) {
 button.addEventListener('click', viewEvent);
 nav.addEventListener('click', viewEvent);
 
+var deleteButton = document.querySelector('.delete-button');
+
 theUL.addEventListener('click', function (event) {
   if (event.target.matches('.icon')) {
     viewSwitch('entry-form');
+    deleteButton.className = 'delete-button';
     var parentLi = event.target.closest('li');
     var parentIdJSON = parentLi.getAttribute('data-entry-id');
     var parentId = parseInt(parentIdJSON);
@@ -130,6 +134,43 @@ theUL.addEventListener('click', function (event) {
         userImage.value = data.editing.images;
         userTitle.value = data.editing.title;
       }
+    }
+  }
+});
+
+var overlay = document.querySelector('.overlay');
+var popup = document.querySelector('.popup');
+var cancelB = document.querySelector('.cancel-button');
+var confirmB = document.querySelector('.confirm-button');
+
+deleteButton.addEventListener('click', function (event) {
+  overlay.className = 'overlay';
+  popup.className = 'popup';
+});
+
+cancelB.addEventListener('click', function (event) {
+  overlay.className = 'overlay hidden';
+  popup.className = 'popup hidden';
+});
+
+confirmB.addEventListener('click', function (event) {
+  overlay.className = 'overlay hidden';
+  popup.className = 'popup hidden';
+  var liList = document.querySelectorAll('li');
+  for (var i = 0; i < data.entries.length; i++) {
+    if (data.entries[i].id === data.editing.id) {
+      var editedEntry = data.entries[i];
+      data.entries.splice(i, 1);
+    }
+  }
+  for (var ii = 0; ii < liList.length; ii++) {
+    var listEntryJSON = liList[ii].getAttribute('data-entry-id');
+    var listEntry = parseInt(listEntryJSON);
+    if (listEntry === editedEntry.id) {
+      liList[ii].remove();
+      data.editing = null;
+      form.reset();
+      viewSwitch('entries');
     }
   }
 });
